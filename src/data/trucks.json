@@ -1,0 +1,5 @@
+[
+  { "id": "small", "name": "Small Truck", "capacity": "10m³" },
+  { "id": "medium", "name": "Medium Truck", "capacity": "20m³" },
+  { "id": "large", "name": "Large Truck", "capacity": "40m³" }
+]
