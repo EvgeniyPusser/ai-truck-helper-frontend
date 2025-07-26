@@ -1,4 +1,9 @@
 import { useState } from "react";
+// Update the import path to where Loader is actually defined, e.g.:
+import Loader from "./components/common/Loader";
+
+// Or if you want to create an index file, create ../components/index.ts and export Loader from there.
+
 
 function App() {
   const [formData, setFormData] = useState({
@@ -12,7 +17,9 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(e: { target: { name: any; value: any; type: any; checked: any; }; }) {
+  function handleChange(e: {
+    target: { name: any; value: any; type: any; checked: any };
+  }) {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -20,7 +27,7 @@ function App() {
     }));
   }
 
-  async function handleSubmit(e: { preventDefault: () => void; }) {
+  async function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     setLoading(true);
     setResult(null);
@@ -100,17 +107,21 @@ function App() {
           Need helpers
         </label>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Planning..." : "Get Plan"}
-        </button>
-      </form>
-
-      {result && (
         <div style={{ marginTop: 20 }}>
-          <h2>Plan Results:</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+          <button type="submit" disabled={loading}>
+            Get Plan
+          </button>
         </div>
-      )}
+
+        {loading && <Loader />}
+
+        {result && (
+          <div style={{ marginTop: 20 }}>
+            <h2>Plan Results:</h2>
+            <pre>{JSON.stringify(result, null, 2)}</pre>
+          </div>
+        )}
+      </form>
     </div>
   );
 }
