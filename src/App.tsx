@@ -1,4 +1,5 @@
 import React from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Box, Container, Flex } from "@chakra-ui/react";
 
 import { HeroSection } from "./components/HeroSection";
@@ -6,6 +7,7 @@ import { QuoteForm } from "./components/QuoteForm";
 import { ResultPanel } from "./components/ResultPanel";
 
 import { useMoveStore } from "./store/useMoveStore";
+import { fetchMovePlan } from "./api/chat";
 
 function App() {
   const formData = useMoveStore((state) => state.formData);
@@ -36,25 +38,26 @@ function App() {
     setFormData({ volume: Number(value) });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setResult(null);
-
-    try {
-      const response = await fetch("http://localhost:3001/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: JSON.stringify(formData) }),
-      });
-
-      const data = await response.json();
-      setResult(data.reply);
-    } catch (err) {
-      alert("Error: " + (err instanceof Error ? err.message : "Unknown error"));
-    } finally {
+  const mutation = useMutation({
+    mutationFn: fetchMovePlan,
+    onMutate: () => {
+      setLoading(true);
+      setResult(null);
+    },
+    onSuccess: (data) => {
+      setResult(data);
+    },
+    onError: (error: any) => {
+      alert("Error: " + (error.message || "Unknown error"));
+    },
+    onSettled: () => {
       setLoading(false);
-    }
+    },
+  });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    mutation.mutate(formData);
   }
 
   function handleReset() {
