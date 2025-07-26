@@ -15,6 +15,7 @@ import {
   Code,
   Flex,
   Container,
+  Select,
 } from "@chakra-ui/react";
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
             maxW="500px"
             w="full"
           >
+            {/* Form Start */}
             <form onSubmit={handleSubmit}>
               <VStack spacing={4} align="stretch">
                 <FormControl isRequired>
@@ -120,8 +122,30 @@ function App() {
                 </FormControl>
 
                 <FormControl isRequired>
-                  <FormLabel>Volume (m³)</FormLabel>
+                  <FormLabel>Volume (m³) or Select Truck Size</FormLabel>
+
+                  <Select
+                    placeholder="Choose a preset"
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        volume: Number(e.target.value),
+                      }))
+                    }
+                    value={formData.volume === 0 ? "" : formData.volume}
+                  >
+                    <option value="5">Small Van (5 m³)</option>
+                    <option value="12">Medium Truck (12 m³)</option>
+                    <option value="20">Large Truck (20 m³)</option>
+                    <option value="30">Extra Large (30 m³+)</option>
+                  </Select>
+
+                  <Text mt={2} fontSize="sm" color="gray.500">
+                    Or enter a custom estimate:
+                  </Text>
+
                   <NumberInput
+                    mt={1}
                     min={1}
                     value={formData.volume}
                     onChange={(valueString) =>
@@ -160,13 +184,52 @@ function App() {
 
         {/* Result Section */}
         {result && (
-          <Box mt={10}>
-            <Heading size="md" mb={3}>
-              Plan Results:
+          <Box
+            mt={10}
+            p={6}
+            bg="white"
+            borderRadius="lg"
+            shadow="md"
+            maxW="600px"
+            mx="auto"
+          >
+            <Heading size="lg" mb={4} textAlign="center" color="teal.600">
+              Your Move Plan Results
             </Heading>
-            <Code whiteSpace="pre-wrap" p={4} display="block" w="100%">
-              {JSON.stringify(result, null, 2)}
-            </Code>
+
+            <Box
+              as="pre"
+              whiteSpace="pre-wrap"
+              fontSize="md"
+              lineHeight="tall"
+              p={4}
+              bg="gray.50"
+              borderRadius="md"
+              overflowX="auto"
+              maxH="300px"
+            >
+              {typeof result === "string"
+                ? result
+                : JSON.stringify(result, null, 2)}
+            </Box>
+
+            <Button
+              mt={4}
+              colorScheme="red"
+              onClick={() => {
+                setResult(null);
+                setFormData({
+                  from: "",
+                  to: "",
+                  date: "",
+                  volume: 0,
+                  needHelpers: false,
+                });
+              }}
+              w="full"
+            >
+              Reset Form
+            </Button>
           </Box>
         )}
       </Container>
