@@ -1,9 +1,21 @@
-import { useState } from "react";
-// Update the import path to where Loader is actually defined, e.g.:
-import Loader from "./components/common/Loader";
-
-// Or if you want to create an index file, create ../components/index.ts and export Loader from there.
-
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
+  NumberInput,
+  NumberInputField,
+  Spinner,
+  Text,
+  VStack,
+  Heading,
+  Code,
+  Flex,
+  Container,
+} from "@chakra-ui/react";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -14,12 +26,10 @@ function App() {
     needHelpers: false,
   });
 
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
-  function handleChange(e: {
-    target: { name: any; value: any; type: any; checked: any };
-  }) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -27,7 +37,7 @@ function App() {
     }));
   }
 
-  async function handleSubmit(e: { preventDefault: () => void }) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setResult(null);
@@ -42,89 +52,126 @@ function App() {
       const data = await response.json();
       setResult(data.reply);
     } catch (err) {
-      if (err instanceof Error) {
-        alert("Error: " + err.message);
-      } else {
-        alert("An unknown error occurred.");
-      }
+      alert("Error: " + (err instanceof Error ? err.message : "Unknown error"));
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div style={{ padding: 20, maxWidth: 600, margin: "auto" }}>
-      <h1>AI Truck Helper - Move Planner</h1>
+    <Box minH="100vh" bg="gray.50" py={10}>
+      <Container maxW="6xl">
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align="center"
+          justify="space-between"
+        >
+          {/* Hero Text Section */}
+          <Box flex="1" pr={{ md: 10 }} mb={{ base: 10, md: 0 }}>
+            <Heading size="2xl" mb={4}>
+              Plan Your Move Like a Pro
+            </Heading>
+            <Text fontSize="lg" color="gray.600">
+              Book your truck, estimate space, and get AI help — all in one
+              place.
+            </Text>
+          </Box>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="from"
-          placeholder="From (city)"
-          value={formData.from}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: 10 }}
-        />
+          {/* Form Section */}
+          <Box
+            flex="1"
+            bg="white"
+            p={8}
+            borderRadius="xl"
+            shadow="lg"
+            maxW="500px"
+            w="full"
+          >
+            <form onSubmit={handleSubmit}>
+              <VStack spacing={4} align="stretch">
+                <FormControl isRequired>
+                  <FormLabel>From (city)</FormLabel>
+                  <Input
+                    name="from"
+                    value={formData.from}
+                    onChange={handleChange}
+                    placeholder="From"
+                  />
+                </FormControl>
 
-        <input
-          type="text"
-          name="to"
-          placeholder="To (city)"
-          value={formData.to}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: 10 }}
-        />
+                <FormControl isRequired>
+                  <FormLabel>To (city)</FormLabel>
+                  <Input
+                    name="to"
+                    value={formData.to}
+                    onChange={handleChange}
+                    placeholder="To"
+                  />
+                </FormControl>
 
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-          style={{ width: "100%", marginBottom: 10 }}
-        />
+                <FormControl isRequired>
+                  <FormLabel>Date</FormLabel>
+                  <Input
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                  />
+                </FormControl>
 
-        <input
-          type="number"
-          name="volume"
-          placeholder="Volume (m3)"
-          value={formData.volume}
-          onChange={handleChange}
-          min="1"
-          required
-          style={{ width: "100%", marginBottom: 10 }}
-        />
+                <FormControl isRequired>
+                  <FormLabel>Volume (m³)</FormLabel>
+                  <NumberInput
+                    min={1}
+                    value={formData.volume}
+                    onChange={(valueString) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        volume: Number(valueString),
+                      }))
+                    }
+                  >
+                    <NumberInputField name="volume" />
+                  </NumberInput>
+                </FormControl>
 
-        <label style={{ display: "block", marginBottom: 10 }}>
-          <input
-            type="checkbox"
-            name="needHelpers"
-            checked={formData.needHelpers}
-            onChange={handleChange}
-          />{" "}
-          Need helpers
-        </label>
+                <FormControl>
+                  <Checkbox
+                    name="needHelpers"
+                    isChecked={formData.needHelpers}
+                    onChange={handleChange}
+                  >
+                    Need helpers
+                  </Checkbox>
+                </FormControl>
 
-        <div style={{ marginTop: 20 }}>
-          <button type="submit" disabled={loading}>
-            Get Plan
-          </button>
-        </div>
+                <Button
+                  type="submit"
+                  colorScheme="teal"
+                  isDisabled={loading}
+                  w="full"
+                >
+                  {loading ? <Spinner size="sm" /> : "Get Plan"}
+                </Button>
+              </VStack>
+            </form>
+          </Box>
+        </Flex>
 
-        {loading && <Loader />}
-
+        {/* Result Section */}
         {result && (
-          <div style={{ marginTop: 20 }}>
-            <h2>Plan Results:</h2>
-            <pre>{JSON.stringify(result, null, 2)}</pre>
-          </div>
+          <Box mt={10}>
+            <Heading size="md" mb={3}>
+              Plan Results:
+            </Heading>
+            <Code whiteSpace="pre-wrap" p={4} display="block" w="100%">
+              {JSON.stringify(result, null, 2)}
+            </Code>
+          </Box>
         )}
-      </form>
-    </div>
+      </Container>
+    </Box>
   );
 }
 
 export default App;
-
