@@ -1,5 +1,6 @@
-import React from "react";
+// src/components/ResultPanel.tsx
 import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import React from "react";
 
 interface ResultPanelProps {
   result: any;
@@ -9,34 +10,48 @@ interface ResultPanelProps {
 export function ResultPanel({ result, onReset }: ResultPanelProps) {
   return (
     <Box
-      mt={10}
+      mt={8}
       p={6}
       bg="white"
-      borderRadius="lg"
-      shadow="md"
+      boxShadow="md"
+      borderRadius="md"
       maxW="600px"
       mx="auto"
     >
-      <Heading size="lg" mb={4} textAlign="center" color="teal.600">
-        Your Move Plan Results
+      <Heading size="md" mb={4}>
+        Your Moving Plan
       </Heading>
 
-      <Box
-        as="pre"
-        whiteSpace="pre-wrap"
-        fontSize="md"
-        lineHeight="tall"
-        p={4}
-        bg="gray.50"
-        borderRadius="md"
-        overflowX="auto"
-        maxH="300px"
-      >
-        {typeof result === "string" ? result : JSON.stringify(result, null, 2)}
-      </Box>
+      <Text>
+        <b>From:</b> {result.from}
+      </Text>
+      <Text>
+        <b>To:</b> {result.to}
+      </Text>
+      <Text>
+        <b>Date:</b> {result.date}
+      </Text>
+      <Text>
+        <b>Truck:</b> {result.truck_name} ({result.truck_size})
+      </Text>
+      <Text>
+        <b>Estimated Volume:</b> {result.estimated_volume_m3} m³
+      </Text>
+      <Text>
+        <b>Estimated Distance:</b> {result.estimated_distance_km} km
+      </Text>
+      <Text>
+        <b>Helpers Needed:</b> {result.helpers_needed}
+      </Text>
+      <Text>
+        <b>Estimated Price:</b> ${result.estimated_price_usd.toFixed(2)}
+      </Text>
+      <Text mt={4} fontStyle="italic">
+        {result.comments}
+      </Text>
 
-      <Button mt={4} colorScheme="red" onClick={onReset} w="full">
-        Reset Form
+      <Button mt={6} colorScheme="red" onClick={onReset}>
+        Reset
       </Button>
     </Box>
   );

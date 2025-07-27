@@ -6,23 +6,38 @@ ai-truck-helper-frontend/
 ┣ package-lock.json
 ┣ package.json
 ┣ public/
+┃ ┣ favicon.ico
 ┃ ┣ index.html
+┃ ┣ manifest.json
 ┃ ┗ vite.svg
 ┣ README.md
+┣ scaffoldNewTree.js
 ┣ src/
 ┃ ┣ api/
+┃ ┃ ┣ auth.ts
 ┃ ┃ ┣ chat.ts
 ┃ ┃ ┣ maps.ts
-┃ ┃ ┗ routeService.ts
+┃ ┃ ┣ routeService.ts
+┃ ┃ ┗ users.ts
 ┃ ┣ App.css
 ┃ ┣ App.tsx
 ┃ ┣ assets/
 ┃ ┃ ┣ logo.svg
 ┃ ┃ ┗ react.svg
 ┃ ┣ components/
+┃ ┃ ┣ Auth/
+┃ ┃ ┃ ┣ Login.tsx
+┃ ┃ ┃ ┗ Signup.tsx
 ┃ ┃ ┣ common/
 ┃ ┃ ┃ ┣ index.ts
-┃ ┃ ┃ ┗ Loader.tsx
+┃ ┃ ┃ ┣ Loader.tsx
+┃ ┃ ┃ ┗ Navbar.tsx
+┃ ┃ ┣ Dashboard/
+┃ ┃ ┃ ┣ AgentDashboard.tsx
+┃ ┃ ┃ ┣ ClientDashboard.tsx
+┃ ┃ ┃ ┣ HelperDashboard.tsx
+┃ ┃ ┃ ┣ MoverDashboard.tsx
+┃ ┃ ┃ ┗ TruckOwnerDashboard.tsx
 ┃ ┃ ┣ Form/
 ┃ ┃ ┃ ┣ index.ts
 ┃ ┃ ┃ ┗ MoveForm.tsx
@@ -39,22 +54,34 @@ ai-truck-helper-frontend/
 ┃ ┃ ┃ ┗ TruckSelector.tsx
 ┃ ┃ ┗ TruckSelector.tsx
 ┃ ┣ context/
+┃ ┃ ┣ AuthContext.tsx
+┃ ┃ ┗ index.ts
 ┃ ┣ data/
 ┃ ┃ ┗ trucks.json
 ┃ ┣ hooks/
+┃ ┃ ┣ useAuth.ts
+┃ ┃ ┗ useFetch.ts
 ┃ ┣ index.css
 ┃ ┣ main.tsx
 ┃ ┣ pages/
-┃ ┃ ┗ Home.tsx
+┃ ┃ ┣ About.tsx
+┃ ┃ ┣ Auth.tsx
+┃ ┃ ┣ Contact.tsx
+┃ ┃ ┣ Dashboard.tsx
+┃ ┃ ┣ Home.tsx
+┃ ┃ ┗ NotFound.tsx
 ┃ ┣ store/
-┃ ┃ ┗ useMoveStore.ts
+┃ ┃ ┣ useMoveStore.ts
+┃ ┃ ┗ useUserStore.ts
 ┃ ┣ styles/
 ┃ ┃ ┣ App.css
 ┃ ┃ ┣ global.css
+┃ ┃ ┣ theme.ts
 ┃ ┃ ┗ variables.css
 ┃ ┣ types/
 ┃ ┃ ┣ api.ts
-┃ ┃ ┗ truck.ts
+┃ ┃ ┣ truck.ts
+┃ ┃ ┗ user.ts
 ┃ ┗ utils/
 ┃   ┗ helpers.ts
 ┣ structure.txt
