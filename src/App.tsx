@@ -2,9 +2,9 @@
 import React from "react";
 import { Box, Container, Flex } from "@chakra-ui/react";
 
-import { Navbar } from "./components/common/Navbar";
-import { MoveForm } from "./components/Form/MoveForm";
-import { ResultPanel } from "./components/ResultPanel";
+import { Navbar } from "./components/common/Navbar"; // ✅ Chakra-styled top bar
+import { MoveForm } from "./components/Form/MoveForm"; // ✅ Form component
+import { ResultPanel } from "./components/ResultPanel"; // ✅ Result display
 
 import { useMoveStore } from "./store/useMoveStore";
 import { fetchMovePlan } from "./api/chat";
@@ -23,14 +23,8 @@ function App() {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) {
-    const target = e.target;
-    if (target instanceof HTMLInputElement) {
-      const { name, value, type, checked } = target;
-      setFormData({ [name]: type === "checkbox" ? checked : value });
-    } else if (target instanceof HTMLSelectElement) {
-      const { name, value } = target;
-      setFormData({ [name]: value });
-    }
+    const { name, value, type, checked } = e.target;
+    setFormData({ [name]: type === "checkbox" ? checked : value });
   }
 
   function handleVolumeChange(value: string) {
@@ -58,7 +52,7 @@ function App() {
 
   return (
     <Box minH="100vh" bg="gray.50">
-      <Navbar />
+      <Navbar /> {/* Top navigation */}
       <Container maxW="6xl" py={10}>
         <Flex
           direction={{ base: "column", md: "row" }}
