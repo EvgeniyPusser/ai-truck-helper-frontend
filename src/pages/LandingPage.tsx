@@ -8,7 +8,6 @@ import {
   Input,
   Stack,
   Text,
-  useColorModeValue,
   keyframes,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -18,6 +17,7 @@ const float = keyframes`
   50% { transform: translateY(-10px); }
 `;
 
+// Background wavy band
 const WavyLines = () => (
   <svg
     width="100%"
@@ -31,11 +31,53 @@ const WavyLines = () => (
       left: 0,
       zIndex: 1,
       opacity: 0.1,
+      transform: "translateY(-50%)",
     }}
   >
     <path
       d="M0 60 C360 120 720 0 1080 60 C1440 120 1440 0 1440 0 L1440 180 L0 180 Z"
       fill="#F97316"
+    />
+  </svg>
+);
+
+// Thin curved lines overlay
+const CurvedLines = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 1440 600"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      pointerEvents: "none",
+      zIndex: 1,
+      opacity: 0.07,
+    }}
+  >
+    <path
+      d="M50 150 C200 100 400 300 600 150 S950 50 1200 200"
+      stroke="#F97316"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M100 450 C300 400 500 600 700 450 S1050 350 1300 500"
+      stroke="#F97316"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M200 250 C400 200 600 400 800 250 S1150 150 1400 300"
+      stroke="#F97316"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -56,18 +98,6 @@ export default function LandingPage() {
       py={{ base: 16, md: 28 }}
       overflow="hidden"
     >
-      {/* Background decorative band (middle wide line) */}
-      <Box
-        position="absolute"
-        top="45%"
-        left={0}
-        width="100%"
-        height="180px"
-        bg="rgba(255,255,255,0.4)"
-        zIndex={1}
-        transform="translateY(-50%)"
-      />
-
       {/* Background blurred decorative circles */}
       <Box
         position="absolute"
@@ -92,6 +122,12 @@ export default function LandingPage() {
         zIndex={0}
       />
 
+      {/* Subtle wavy orange band */}
+      <WavyLines />
+
+      {/* Curved lines overlay */}
+      <CurvedLines />
+
       {/* Main Content */}
       <Flex
         direction={{ base: "column", md: "row" }}
@@ -103,7 +139,7 @@ export default function LandingPage() {
         zIndex={2}
         position="relative"
       >
-        {/* Image Section */}
+        {/* Image Section with gentle float */}
         <Box
           flex="1"
           animation={`${float} 6s ease-in-out infinite`}
