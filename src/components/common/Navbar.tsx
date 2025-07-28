@@ -1,4 +1,3 @@
-// Placeholder file for project structure// src/components/Navbar.tsx
 import React from "react";
 import {
   Box,
@@ -10,16 +9,29 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from "react-router-dom";
 
-const Links = ["Home", "About", "Services", "Contact"];
+const Links = [
+  { name: "Landing", path: "/" },
+  { name: "Home", path: "/home" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
+];
 
-const NavLink = ({ children }: { children: React.ReactNode }) => (
+const NavLink = ({
+  children,
+  to,
+}: {
+  children: React.ReactNode;
+  to: string;
+}) => (
   <Link
+    as={RouterLink}
+    to={to}
     px={2}
     py={1}
     rounded={"md"}
     _hover={{ textDecoration: "none", bg: "gray.200" }}
-    href={"#"}
   >
     {children}
   </Link>
@@ -42,8 +54,10 @@ export const Navbar = () => {
             display={{ base: "none", md: "flex" }}
             mr={4}
           >
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+            {Links.map(({ name, path }) => (
+              <NavLink key={name} to={path}>
+                {name}
+              </NavLink>
             ))}
           </HStack>
 
@@ -60,8 +74,10 @@ export const Navbar = () => {
       {isOpen ? (
         <Box pb={4} display={{ md: "none" }}>
           <Stack as={"nav"} spacing={4}>
-            {Links.map((link) => (
-              <NavLink key={link}>{link}</NavLink>
+            {Links.map(({ name, path }) => (
+              <NavLink key={name} to={path}>
+                {name}
+              </NavLink>
             ))}
           </Stack>
         </Box>

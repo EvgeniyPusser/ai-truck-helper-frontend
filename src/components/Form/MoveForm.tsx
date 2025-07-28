@@ -10,6 +10,7 @@ import {
   NumberInput,
   NumberInputField,
   Stack,
+  Select,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -27,7 +28,13 @@ interface MoveFormProps {
   loading: boolean;
 }
 
-export function MoveForm({ formData, onChange, onVolumeChange, onSubmit, loading }: MoveFormProps) {
+export function MoveForm({
+  formData,
+  onChange,
+  onVolumeChange,
+  onSubmit,
+  loading,
+}: MoveFormProps) {
   return (
     <Box
       p={6}
@@ -62,18 +69,36 @@ export function MoveForm({ formData, onChange, onVolumeChange, onSubmit, loading
 
         <FormControl id="date" isRequired>
           <FormLabel>Moving Date</FormLabel>
-          <Input type="date" name="date" value={formData.date} onChange={onChange} />
+          <Input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={onChange}
+          />
         </FormControl>
 
         <FormControl id="volume" isRequired>
           <FormLabel>Estimated Volume (m³)</FormLabel>
-          <NumberInput
+          {/* <NumberInput
             min={1}
             value={formData.volume}
             onChange={(value) => onVolumeChange(value)}
           >
             <NumberInputField name="volume" />
-          </NumberInput>
+          </NumberInput> */}
+
+          <Select
+            placeholder="Choose a preset"
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              onVolumeChange(e.target.value)
+            }
+            value={formData.volume === 0 ? "" : formData.volume}
+          >
+            <option value="5">Small Van (5 m³)</option>
+            <option value="12">Medium Truck (12 m³)</option>
+            <option value="20">Large Truck (20 m³)</option>
+            <option value="30">Extra Large (30 m³+)</option>
+          </Select>
         </FormControl>
 
         <FormControl>

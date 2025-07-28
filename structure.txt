@@ -7,6 +7,8 @@ ai-truck-helper-frontend/
 ┣ package.json
 ┣ public/
 ┃ ┣ favicon.ico
+┃ ┣ images/
+┃ ┃ ┗ moveo-summer.png
 ┃ ┣ index.html
 ┃ ┣ manifest.json
 ┃ ┗ vite.svg
@@ -32,16 +34,11 @@ ai-truck-helper-frontend/
 ┃ ┃ ┃ ┣ index.ts
 ┃ ┃ ┃ ┣ Loader.tsx
 ┃ ┃ ┃ ┗ Navbar.tsx
-┃ ┃ ┣ Dashboard/
-┃ ┃ ┃ ┣ AgentDashboard.tsx
-┃ ┃ ┃ ┣ ClientDashboard.tsx
-┃ ┃ ┃ ┣ HelperDashboard.tsx
-┃ ┃ ┃ ┣ MoverDashboard.tsx
-┃ ┃ ┃ ┗ TruckOwnerDashboard.tsx
 ┃ ┃ ┣ Form/
 ┃ ┃ ┃ ┣ index.ts
 ┃ ┃ ┃ ┗ MoveForm.tsx
 ┃ ┃ ┣ HeroSection.tsx
+┃ ┃ ┣ Layout.tsx
 ┃ ┃ ┣ Loader.tsx
 ┃ ┃ ┣ Map/
 ┃ ┃ ┃ ┣ index.ts
@@ -67,9 +64,20 @@ ai-truck-helper-frontend/
 ┃ ┃ ┣ About.tsx
 ┃ ┃ ┣ Auth.tsx
 ┃ ┃ ┣ Contact.tsx
+┃ ┃ ┣ Dashboard/
+┃ ┃ ┃ ┣ AgentDashboard.tsx
+┃ ┃ ┃ ┣ ClientDashboard.tsx
+┃ ┃ ┃ ┣ HelperDashboard.tsx
+┃ ┃ ┃ ┣ MoverDashboard.tsx
+┃ ┃ ┃ ┗ TruckOwnerDashboard.tsx
 ┃ ┃ ┣ Dashboard.tsx
 ┃ ┃ ┣ Home.tsx
+┃ ┃ ┣ LandingPage.tsx
 ┃ ┃ ┗ NotFound.tsx
+┃ ┣ routes/
+┃ ┃ ┣ DashboardRoutes.tsx
+┃ ┃ ┣ index.ts
+┃ ┃ ┗ PrivateRoute.tsx
 ┃ ┣ store/
 ┃ ┃ ┣ useMoveStore.ts
 ┃ ┃ ┗ useUserStore.ts
