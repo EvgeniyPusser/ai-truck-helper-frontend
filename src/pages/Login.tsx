@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Input, Button, Heading, VStack, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { useUserStore } from "../../store/useUserStore";
+import { useUserStore } from "../store/useUserStore";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -15,12 +15,8 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/auth/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
-
       const { token, user } = response.data;
 
       localStorage.setItem("token", token);

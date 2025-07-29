@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
-interface User {
+export interface User {
+  id: string;
+  email: string;
   role: "client" | "mover" | "truckOwner" | "helper" | "agent";
-  // add other fields if needed
 }
 
 interface UserState {
@@ -14,6 +15,9 @@ export const useUserStore = create<UserState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
 }));
+
+
+
 
 
 

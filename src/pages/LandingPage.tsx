@@ -8,8 +8,9 @@ import {
   Input,
   Stack,
   Text,
-  keyframes,
 } from "@chakra-ui/react";
+import { keyframes } from "@emotion/react"; // ✅ correct
+
 import { useState } from "react";
 
 const float = keyframes`
@@ -146,7 +147,7 @@ export default function LandingPage() {
           maxW="320px"
         >
           <Image
-            src="/images/moveo-summer.png"
+            src="./images/moveo-summer.png"
             alt="Moveo the mascot"
             borderRadius="2xl"
             shadow="lg"

@@ -1,4 +1,3 @@
-
 import React, { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
@@ -9,12 +8,7 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ allowedRoles, children }: PrivateRouteProps) => {
-  interface User {
-    role: string;
-    // Add other user properties if needed
-  }
-
-  const user: User | null = useUserStore((state: { user: User | null }): User | null => state.user);
+  const user = useUserStore((state) => state.user);
 
   if (!user) return <Navigate to="/login" replace />;
   if (!allowedRoles.includes(user.role))
@@ -24,4 +18,3 @@ const PrivateRoute = ({ allowedRoles, children }: PrivateRouteProps) => {
 };
 
 export default PrivateRoute;
-
