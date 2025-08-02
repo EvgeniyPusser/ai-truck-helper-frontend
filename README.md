@@ -10,3 +10,13 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Form Styling
+
+Shared CSS classes for form elements are defined in `src/index.css`. Use these classes to keep forms consistent:
+
+- `.form-input` for text, date, and number inputs.
+- `.form-label` for labels wrapping input elements.
+- `.form-button` for form submission buttons.
+
+`main.tsx` imports `src/index.css`, so these classes are available globally. Apply them in any new forms added to the project.

@@ -57,7 +57,7 @@ function App() {
           value={formData.from}
           onChange={handleChange}
           required
-          style={{ width: "100%", marginBottom: 10 }}
+          className="form-input"
         />
 
         <input
@@ -67,7 +67,7 @@ function App() {
           value={formData.to}
           onChange={handleChange}
           required
-          style={{ width: "100%", marginBottom: 10 }}
+          className="form-input"
         />
 
         <input
@@ -76,7 +76,7 @@ function App() {
           value={formData.date}
           onChange={handleChange}
           required
-          style={{ width: "100%", marginBottom: 10 }}
+          className="form-input"
         />
 
         <input
@@ -87,10 +87,10 @@ function App() {
           onChange={handleChange}
           min="1"
           required
-          style={{ width: "100%", marginBottom: 10 }}
+          className="form-input"
         />
 
-        <label style={{ display: "block", marginBottom: 10 }}>
+        <label className="form-label">
           <input
             type="checkbox"
             name="needHelpers"
@@ -100,7 +100,7 @@ function App() {
           Need helpers
         </label>
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} className="form-button">
           {loading ? "Planning..." : "Get Plan"}
         </button>
       </form>
