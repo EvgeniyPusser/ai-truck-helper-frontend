@@ -1,0 +1,23 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.home-title {
+  margin: 0;
+}
+
+.home-truck-selector,
+.home-selected-truck,
+.home-map {
+  width: 100%;
+  text-align: center;
+}
+
+.home-map {
+  display: flex;
+  justify-content: center;
+}
