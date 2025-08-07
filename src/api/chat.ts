@@ -5,7 +5,7 @@ export async function fetchMovePlan(formData: any) {
   const response = await fetch("http://localhost:3001/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: JSON.stringify(formData) }),
+    body: JSON.stringify(formData),
   });
 
   if (!response.ok) {

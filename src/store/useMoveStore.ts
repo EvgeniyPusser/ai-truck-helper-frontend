@@ -7,6 +7,7 @@ interface MoveState {
     date: string;
     volume: number;
     needHelpers: boolean;
+    comments: string; // 🆕 добавили
   };
   setFormData: (newData: Partial<MoveState["formData"]>) => void;
 
@@ -26,6 +27,7 @@ export const useMoveStore = create<MoveState>((set) => ({
     date: "",
     volume: 0,
     needHelpers: false,
+    comments: "", // 🆕 начальное значение
   },
   setFormData: (newData) =>
     set((state) => ({
@@ -43,6 +45,7 @@ export const useMoveStore = create<MoveState>((set) => ({
         date: "",
         volume: 0,
         needHelpers: false,
+        comments: "", // 🆕 сброс
       },
       result: null,
       loading: false,
