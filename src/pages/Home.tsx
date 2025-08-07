@@ -36,32 +36,13 @@ export default function Home() {
     setFormData({ volume: Number(value) });
   }
 
-  // async function handleSubmit(e: React.FormEvent) {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setResult(null);
-  //   try {
-  //     const data = await fetchMovePlan(formData);
-  //     setResult(data);
-  //   } catch (err: any) {
-  //     alert("Error: " + (err.message || "Unknown error"));
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+ 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setResult(null);
     try {
-      //   const message = `
-      //   Мне нужно перевезти вещи из ${formData.from} в ${formData.to}.
-      //   Примерный объём: ${formData.volume} м3.
-      //   Я планирую переезд на ${formData.date || "ближайшие дни"}.
-      //   ${formData.comments ? `Комментарий: ${formData.comments}` : ""}
-      // `;
-      //   const data = await fetchMovePlan(message); // <- передаём строку
       const payload = {
         origin: formData.from,
         destination: formData.to,
